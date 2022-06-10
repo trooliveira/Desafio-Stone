@@ -1,0 +1,61 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "users_ids.csv",
+        dataType: "text",
+        success: function(data) {processData(data);}
+     });
+});
+
+function processData(allText) {
+    var allTextLines = allText.split(/\n/);
+    var index = [];
+    var email = [];
+    for (var i=1; i < allTextLines.length; i++){
+        raw = allTextLines[i].split(';');
+    index.push(raw[0]);
+    email.push(raw[1]);
+    };
+    fixTransactions(index)
+    sendEmails(email);
+
+function fixTransactions(userIds) {
+  console.log('Corrigindo transações dos usuários enviados')
+}
+
+function sendEmails(userEmails) {
+  console.log('Enviando comunicação para os usuários impactados')
+}
+
+/* function main = async () => {
+  await fixTransactions()
+  await sendEmails()
+} */
+
+function main(){
+  processData(allText);
+  this.then(() => console.log('Transações reprocessadas!'));
+  this.catch(err => console.error(err));
+}
+
+
+    /* var lines = [];
+    var headings = entries.splice(0,record_num);
+    while (entries.length>0) {
+        var tarr = [];
+        for (var j=0; j<record_num; j++) {
+            tarr.push(headings[j]+":"+entries.shift());
+        }
+        lines.push(tarr);
+    } */
+
+}
+</script>
+</head>
+<body>
+</body>
+</html>
